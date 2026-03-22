@@ -1,18 +1,24 @@
-// Opcional: Generar pequeñas flores amarillas aleatorias
-const container = document.querySelector('.leaves-container'); 
+const container = document.querySelector('.leaves-container');
 
-for (let i = 0; i < 50; i++) { 
-   const leaf = document.createElement('div'); 
-   leaf.style.position = 'absolute'; 
-   leaf.style.width = '15px'; 
-   leaf.style.height = '15px'; 
-   leaf.style.backgroundColor = '#FFD700'; 
-   leaf.style.borderRadius = '50%'; 
-   leaf.style.left = Math.random() * 100 + '%'; 
-   leaf.style.top = Math.random() * 100 + '%'; 
-   leaf.style.opacity = Math.random(); 
-   container.appendChild(leaf); 
-} 
-
-
-
+for (let i = 0; i < 60; i++) {
+   const flower = document.createElement('div');
+   flower.style.position = 'absolute';
+   
+   // Tamaños variados
+   const size = Math.random() * 15 + 5 + 'px';
+   flower.style.width = size;
+   flower.style.height = size;
+   
+   flower.style.backgroundColor = '#FFD700';
+   flower.style.borderRadius = '50%';
+   
+   // Posicionamiento aleatorio dentro del círculo
+   flower.style.left = Math.random() * 90 + '%';
+   flower.style.top = Math.random() * 90 + '%';
+   
+   // Animación sutil de brillo
+   flower.style.opacity = Math.random();
+   flower.style.boxShadow = '0 0 5px white';
+   
+   container.appendChild(flower);
+}
