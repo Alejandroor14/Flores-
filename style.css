@@ -3,7 +3,6 @@
     --letter: rgba(255, 255, 255, 0.6);
 }
 
-/* RESET */
 * {
     margin: 0;
     padding: 0;
@@ -17,18 +16,17 @@ body {
     justify-content: center;
     background: radial-gradient(circle, #fff8dc, #fdf5e6);
     overflow: hidden;
-    font-family: 'Arial', sans-serif;
+    font-family: Arial, sans-serif;
 }
 
-/* CONTENEDOR */
 .container {
     position: relative;
     width: 100%;
     height: 100%;
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
 }
 
 /* BOTÓN */
@@ -36,12 +34,10 @@ body {
     padding: 15px 35px;
     font-size: 1.3rem;
     background: linear-gradient(45deg, #FFD700, #ffcc00);
-    color: #5d3311;
     border: none;
     border-radius: 50px;
     cursor: pointer;
     box-shadow: 0 0 20px rgba(255,215,0,0.6);
-    z-index: 100;
     transition: 0.3s;
 }
 
@@ -56,13 +52,11 @@ body {
 
 /* ÁRBOL */
 .tree {
-    position: relative;
     opacity: 0;
-    transition: opacity 1s ease;
+    transition: 1s;
     display: flex;
     flex-direction: column;
     align-items: center;
-    transform: translateY(-20px);
 }
 
 .tree.show {
@@ -76,7 +70,6 @@ body {
     height: 260px;
 }
 
-/* Forma corazón */
 .heart-shape {
     position: absolute;
     width: 160px;
@@ -89,7 +82,6 @@ body {
     animation: latido 2s infinite;
 }
 
-/* círculos del corazón */
 .heart-shape::before,
 .heart-shape::after {
     content: '';
@@ -102,17 +94,15 @@ body {
 
 .heart-shape::before {
     top: -80px;
-    left: 0;
 }
 
 .heart-shape::after {
     left: 80px;
-    top: 0;
 }
 
-/* 💓 LATIDO */
+/* LATIDO */
 @keyframes latido {
-    0%, 100% { transform: rotate(-45deg) scale(1); }
+    0%,100% { transform: rotate(-45deg) scale(1); }
     50% { transform: rotate(-45deg) scale(1.05); }
 }
 
@@ -122,9 +112,7 @@ body {
     height: 120px;
     background: linear-gradient(to right, #5d3311, #8b4513);
     border-radius: 0 0 12px 12px;
-    margin-top: -10px;
-    box-shadow: inset 0 0 10px rgba(0,0,0,0.2);
-    transition: transform 1s ease;
+    transform-origin: bottom;
 }
 
 /* FLORES */
@@ -133,27 +121,23 @@ body {
     width: 18px;
     height: 18px;
     opacity: 0;
-    z-index: 10;
 }
 
-/* pétalos */
 .flower::before,
 .flower::after {
     content: '';
     position: absolute;
     width: 100%;
     height: 100%;
-    background: radial-gradient(circle, #FFD700, #f5c518);
+    background: #FFD700;
     border-radius: 50% 0 50% 0;
     transform: rotate(45deg);
 }
 
-/* segundo pétalo */
 .flower::after {
     transform: rotate(90deg);
 }
 
-/* centro */
 .flower-center {
     position: absolute;
     width: 6px;
@@ -162,12 +146,6 @@ body {
     border-radius: 50%;
     top: 6px;
     left: 6px;
-    z-index: 11;
-}
-
-/* ✨ EFECTO BRILLO EN FLORES */
-.flower {
-    filter: drop-shadow(0 0 3px gold);
 }
 
 /* MENSAJE */
@@ -185,34 +163,27 @@ body {
     font-size: 2rem;
     color: #b58900;
     opacity: 0;
-    transition: 2s ease;
-    backdrop-filter: blur(8px);
-    box-shadow: 0 0 20px rgba(255,215,0,0.3);
+    transition: 2s;
 }
 
 .Flores_Amarillas.show {
     opacity: 1;
 }
 
-/* ✨ PARTÍCULAS */
+/* PARTÍCULAS */
 .particula {
     position: fixed;
     bottom: -10px;
     width: 10px;
     height: 10px;
-    background: radial-gradient(circle, gold, transparent);
+    background: gold;
     border-radius: 50%;
-    opacity: 0.9;
     animation: subir linear forwards;
 }
 
 @keyframes subir {
-    0% {
-        transform: translateY(0) scale(1);
-        opacity: 1;
-    }
-    100% {
-        transform: translateY(-110vh) scale(0.5);
+    to {
+        transform: translateY(-100vh);
         opacity: 0;
     }
 }
