@@ -25,19 +25,19 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function crecerArbol() {
         const trunk = document.querySelector(".trunk");
-
         trunk.style.transform = "scaleY(0)";
-
         setTimeout(() => {
             trunk.style.transition = "1s ease";
             trunk.style.transform = "scaleY(1)";
         }, 100);
     }
 
-    // 💖 CORAZÓN PERFECTO
+    // ❤️ GENERAR CORAZÓN REAL
     function generarFlores() {
 
-        for (let i = 0; i < 300; i++) {
+        const scale = 8;
+
+        for (let i = 0; i < 250; i++) {
 
             const t = Math.random() * Math.PI * 2;
 
@@ -48,8 +48,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 2 * Math.cos(3 * t) -
                 Math.cos(4 * t);
 
-            const posX = (x * 8) + 150;
-            const posY = (-y * 8) + 150;
+            const posX = x * scale + 150;
+            const posY = -y * scale + 130;
 
             const flower = document.createElement("div");
             flower.classList.add("flower");
@@ -69,3 +69,23 @@ document.addEventListener("DOMContentLoaded", () => {
             setTimeout(() => {
                 flower.style.transition = "0.3s ease";
                 flower.style.opacity = 1;
+                flower.style.transform = "scale(1)";
+            }, i * 10);
+        }
+    }
+
+    function crearParticulas() {
+        for (let i = 0; i < 50; i++) {
+            const p = document.createElement("div");
+            p.classList.add("particula");
+
+            p.style.left = Math.random() * 100 + "vw";
+            p.style.animationDuration = (2 + Math.random() * 3) + "s";
+
+            document.body.appendChild(p);
+
+            setTimeout(() => p.remove(), 5000);
+        }
+    }
+
+});
