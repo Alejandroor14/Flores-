@@ -39,17 +39,25 @@ body {
     cursor: pointer;
     box-shadow: 0 0 20px rgba(255,215,0,0.6);
     transition: 0.3s;
+    position: absolute;
+    z-index: 10;
+}
+
+#playButton:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 30px rgba(255,215,0,0.8);
 }
 
 #playButton.fade-out {
     opacity: 0;
     pointer-events: none;
+    transition: opacity 0.8s ease;
 }
 
 /* ÁRBOL */
 .tree {
     opacity: 0;
-    transition: 1s;
+    transition: opacity 1s ease;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -59,19 +67,19 @@ body {
     opacity: 1;
 }
 
-/* CONTENEDOR */
+/* CONTENEDOR DE HOJAS/FLORES */
 .heart-leaves-container {
     position: relative;
     width: 300px;
-    height: 260px;
+    height: 280px;
 }
 
-/* ❤️ CORAZÓN (SOLO REFERENCIA VISUAL) */
+/* ❤️ CORAZÓN - contenedor de flores */
 .heart-shape {
     position: absolute;
     width: 300px;
-    height: 260px;
-    overflow: visible; /* 🔥 IMPORTANTE */
+    height: 280px;
+    overflow: visible;
 }
 
 /* TRONCO */
@@ -86,11 +94,12 @@ body {
 /* FLORES */
 .flower {
     position: absolute;
-    width: 18px;
-    height: 18px;
+    width: 20px;
+    height: 20px;
     opacity: 0;
 }
 
+/* Pétalos con pseudo-elementos rotados */
 .flower::before,
 .flower::after {
     content: '';
@@ -99,7 +108,12 @@ body {
     height: 100%;
     background: #FFD700;
     border-radius: 50% 0 50% 0;
-    transform: rotate(45deg);
+    top: 0;
+    left: 0;
+}
+
+.flower::before {
+    transform: rotate(0deg);
 }
 
 .flower::after {
@@ -108,15 +122,17 @@ body {
 
 .flower-center {
     position: absolute;
-    width: 6px;
-    height: 6px;
+    width: 7px;
+    height: 7px;
     background: #3b1d05;
     border-radius: 50%;
-    top: 6px;
-    left: 6px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
 }
 
-/* MENSAJE */
+/* MENSAJE FINAL */
 .Flores_Amarillas {
     position: absolute;
     bottom: 8%;
@@ -128,12 +144,15 @@ body {
     justify-content: center;
     align-items: center;
     border-radius: 20px;
-    font-size: 2rem;
+    font-size: 1.5rem;
+    font-style: italic;
+    letter-spacing: 2px;
     color: #b58900;
     opacity: 0;
-    transition: 2s;
+    transition: opacity 2s ease;
 }
 
+/* ← Esta clase la agrega el JS */
 .Flores_Amarillas.show {
     opacity: 1;
 }
@@ -154,4 +173,4 @@ body {
         transform: translateY(-100vh);
         opacity: 0;
     }
-}
+    }
