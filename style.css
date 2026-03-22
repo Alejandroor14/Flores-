@@ -1,71 +1,146 @@
-:root { 
-   --letter-love: 80px; 
-   --letter: rgba(255, 255, 255, 0.5); 
-} 
+:root {
+    --letter-love: 80px;
+    --letter: rgba(255, 255, 255, 0.6);
+}
 
-body { 
-   background-color: #fdf5e6; 
-   display: flex; 
-   justify-content: center; 
-   align-items: center; 
-   height: 100vh; 
-   margin: 0; 
-   overflow: hidden; 
-} 
+body {
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #fdf5e6;
+    overflow: hidden;
+    font-family: 'Arial', sans-serif;
+}
 
-.container { 
-   position: relative; 
-   width: 100%; 
-   height: 100%; 
-   display: flex; 
-   flex-direction: column; 
-   align-items: center; 
-   justify-content: center; 
-} 
-
-.tree {
+.container {
     position: relative;
+    width: 100%;
+    height: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    bottom: 50px; /* Sube un poco el árbol */
+    justify-content: center;
 }
 
-.trunk { 
-   width: 25px; 
-   height: 100px; 
-   background: linear-gradient(to right, #5d3311, #8b4513); 
-   border-radius: 5px;
-   z-index: 1; 
-} 
+/* Botón de inicio */
+#playButton {
+    padding: 15px 30px;
+    font-size: 1.3rem;
+    background-color: #FFD700;
+    color: #5d3311;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+    z-index: 100;
+    transition: 0.3s;
+}
 
-.leaves-container { 
-   position: absolute; 
-   bottom: 80px; /* Se apoya sobre el tronco */
-   width: 280px; 
-   height: 250px; 
-   background: #ffdb58; 
-   /* Forma de corazón/nube */
-   border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%; 
-   box-shadow: 0 0 40px rgba(244, 208, 63, 0.6); 
-   overflow: hidden; /* Mantiene las flores dentro de la copa */
-} 
+#playButton.fade-out {
+    opacity: 0;
+    pointer-events: none;
+}
 
-.Flores_Amarillas { 
-   position: absolute; 
-   bottom: 5%; 
-   left: 50%; 
-   width: 85%; 
-   font-size: 1.8rem; 
-   font-family: 'Georgia', serif; 
-   height: var(--letter-love); 
-   transform: translateX(-50%); 
-   background: var(--letter); 
-   display: flex; 
-   justify-content: center; 
-   align-items: center; 
-   border-radius: 20px; 
-   box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-   color: #d4a017; 
-   backdrop-filter: blur(5px);
-} 
+/* Árbol y Corazón */
+.tree {
+    position: relative;
+    opacity: 0;
+    transition: opacity 1s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transform: translateY(-20px);
+}
+
+.tree.show { opacity: 1; }
+
+.heart-leaves-container {
+    position: relative;
+    width: 280px;
+    height: 250px;
+}
+
+.heart-shape {
+    position: absolute;
+    width: 150px;
+    height: 150px;
+    background-color: #ffdb58;
+    left: 65px;
+    top: 50px;
+    transform: rotate(-45deg);
+    overflow: hidden; /* Corta las flores para que formen el corazón */
+}
+
+.heart-shape::after, .heart-shape::before {
+    content: '';
+    position: absolute;
+    width: 150px;
+    height: 150px;
+    background-color: #ffdb58;
+    border-radius: 50%;
+}
+
+.heart-shape::before { top: -75px; left: 0; }
+.heart-shape::after { top: 0; left: 75px; }
+
+.trunk {
+    width: 25px;
+    height: 100px;
+    background: linear-gradient(to right, #5d3311, #8b4513);
+    border-radius: 0 0 10px 10px;
+}
+
+/* Flores dibujadas con CSS */
+.flower {
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    opacity: 0;
+    z-index: 10;
+}
+
+.flower::before, .flower::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: #FFD700;
+    border-radius: 50% 0 50% 0;
+    transform: rotate(45deg);
+}
+
+.flower::after { transform: rotate(90deg); }
+
+.flower-center {
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    background: #5d3311;
+    border-radius: 50%;
+    top: 6px;
+    left: 6px;
+    z-index: 11;
+}
+
+/* Mensaje final */
+.Flores_Amarillas {
+    position: absolute;
+    bottom: 8%;
+    width: 80%;
+    max-width: 400px;
+    height: var(--letter-love);
+    background: var(--letter);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px;
+    font-size: 2rem;
+    color: #b58900;
+    opacity: 0;
+    transition: 2s ease;
+    backdrop-filter: blur(5px);
+}
+
+.Flores_Amarillas.show { opacity: 1; }
