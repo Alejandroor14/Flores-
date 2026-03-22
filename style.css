@@ -1,6 +1,13 @@
+/* style.css */
 :root {
-    --letter-love: 80px;
-    --letter: rgba(255, 255, 255, 0.6);
+    --bg-color: #fdf5e6; /* Un crema suave y cálido */
+    --trunk-base: #5d3311;
+    --trunk-light: #8b4513;
+    --flower-petal: #FFD700;
+    --flower-petal-dark: #FFA500;
+    --flower-center: #3b1d05;
+    --message-bg: rgba(255, 255, 255, 0.8);
+    --message-text: #b58900;
 }
 
 * {
@@ -14,9 +21,9 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    background: radial-gradient(circle, #fff8dc, #fdf5e6);
+    background-color: var(--bg-color);
     overflow: hidden;
-    font-family: Arial, sans-serif;
+    font-family: 'Georgia', serif; /* Una fuente más elegante */
 }
 
 .container {
@@ -29,148 +36,179 @@ body {
     flex-direction: column;
 }
 
-/* BOTÓN */
+/* BOTÓN INICIAL */
 #playButton {
-    padding: 15px 35px;
-    font-size: 1.3rem;
+    padding: 18px 40px;
+    font-size: 1.4rem;
+    font-family: 'Arial', sans-serif;
+    font-weight: bold;
+    color: #3b1d05;
     background: linear-gradient(45deg, #FFD700, #ffcc00);
     border: none;
     border-radius: 50px;
     cursor: pointer;
-    box-shadow: 0 0 20px rgba(255,215,0,0.6);
-    transition: 0.3s;
+    box-shadow: 0 8px 15px rgba(218, 165, 32, 0.4);
+    transition: all 0.3s ease;
     position: absolute;
-    z-index: 10;
+    z-index: 100;
 }
 
 #playButton:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0 30px rgba(255,215,0,0.8);
+    transform: translateY(-3px) scale(1.03);
+    box-shadow: 0 12px 20px rgba(218, 165, 32, 0.6);
+}
+
+#playButton:active {
+    transform: translateY(-1px);
 }
 
 #playButton.fade-out {
     opacity: 0;
     pointer-events: none;
-    transition: opacity 0.8s ease;
+    transition: opacity 0.8s ease, transform 0.8s ease;
+    transform: translate(-50%, -50%) scale(0.5); /* Se encoge al desaparecer */
 }
 
-/* ÁRBOL */
-.tree {
-    opacity: 0;
-    transition: opacity 1s ease;
+/* CONTENEDOR DEL ÁRBOL */
+.tree-container {
+    position: relative;
+    width: 400px;  /* Más ancho para dar volumen */
+    height: 500px;
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: flex-end; /* Alinea el tronco abajo */
+    opacity: 0;
+    transition: opacity 1s ease;
+    transform: translateY(20px); /* Pequeño salto al aparecer */
 }
 
-.tree.show {
+.tree-container.show {
     opacity: 1;
+    transform: translateY(0);
 }
 
-/* CONTENEDOR DE HOJAS/FLORES */
-.heart-leaves-container {
-    position: relative;
-    width: 300px;
-    height: 280px;
-}
-
-/* ❤️ CORAZÓN - contenedor de flores */
-.heart-shape {
+/* FOLLAJE EN FORMA DE CORAZÓN */
+.foliage-heart {
     position: absolute;
-    width: 300px;
-    height: 280px;
-    overflow: visible;
+    width: 380px;  /* Controla el ancho del corazón */
+    height: 350px; /* Controla el alto del corazón */
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    overflow: visible; /* Importante para que las flores sobresalgan */
+    z-index: 2;
 }
 
 /* TRONCO */
-.trunk {
-    width: 28px;
-    height: 120px;
-    background: linear-gradient(to right, #5d3311, #8b4513);
-    border-radius: 0 0 12px 12px;
-    transform-origin: bottom;
+.trunk-container {
+    position: relative;
+    width: 100%;
+    height: 150px; /* Altura del tronco visible */
+    display: flex;
+    justify-content: center;
+    z-index: 1;
+    margin-top: -20px; /* Superpone un poco el corazón */
 }
 
-/* FLORES */
+.trunk {
+    width: 40px; /* Base más ancha */
+    height: 100%;
+    background: linear-gradient(180deg, var(--trunk-light) 0%, var(--trunk-base) 100%);
+    border-radius: 10px 10px 0 0;
+    /* Efecto cónico: más ancho abajo */
+    clip-path: polygon(15% 0%, 85% 0%, 100% 100%, 0% 100%);
+    transform: scaleY(0);
+    transform-origin: bottom;
+    box-shadow: inset -5px 0 10px rgba(0,0,0,0.3); /* Sombra interna para textura */
+}
+
+/* ESTILO DE LA FLOR (Girasol real) */
 .flower {
     position: absolute;
-    width: 20px;
-    height: 20px;
+    width: 32px;  /* Tamaño base de la flor */
+    height: 32px;
     opacity: 0;
+    transform-origin: center center;
+    z-index: 3;
+    /* Pequeña sombra para dar profundidad entre flores */
+    filter: drop-shadow(0 2px 3px rgba(0,0,0,0.2));
 }
 
-/* Pétalos con pseudo-elementos rotados */
-.flower::before,
-.flower::after {
+/* Pétalos con pseudoelementos y gradientes */
+.flower::before {
     content: '';
     position: absolute;
-    width: 100%;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: 
+        /* Pétalos 1 (base) */
+        radial-gradient(circle at 50% 50%, transparent 20%, var(--flower-petal) 21%, var(--flower-petal-dark) 70%, transparent 71%),
+        /* Pétalos 2 (rotados internamente) */
+        radial-gradient(circle at 50% 50%, transparent 20%, var(--flower-petal) 21%, var(--flower-petal-dark) 70%, transparent 71%);
+    background-size: 100% 100%;
+    background-position: center;
+    border-radius: 50%;
+    /* Superponemos dos capas de pétalos rotadas */
+    mask-image: 
+        linear-gradient(0deg, #fff 10%, transparent 10%, transparent 90%, #fff 90%),
+        linear-gradient(90deg, #fff 10%, transparent 10%, transparent 90%, #fff 90%);
+    -webkit-mask-image: 
+        linear-gradient(0deg, #fff 10%, transparent 10%, transparent 90%, #fff 90%),
+        linear-gradient(90deg, #fff 10%, transparent 10%, transparent 90%, #fff 90%);
+}
+
+/* Diseño de pétalos individuales usando clip-path para forma ovalada */
+.petal {
+    position: absolute;
+    background: linear-gradient(180deg, var(--flower-petal) 0%, var(--flower-petal-dark) 100%);
+    width: 40%;
     height: 100%;
-    background: #FFD700;
-    border-radius: 50% 0 50% 0;
     top: 0;
-    left: 0;
+    left: 30%; /* Centrado horizontal */
+    border-radius: 50% 50% 0 0;
+    transform-origin: bottom center;
 }
 
-.flower::before {
-    transform: rotate(0deg);
-}
-
-.flower::after {
-    transform: rotate(90deg);
-}
-
+/* Centro oscuro texturizado */
 .flower-center {
     position: absolute;
-    width: 7px;
-    height: 7px;
-    background: #3b1d05;
+    width: 35%;
+    height: 35%;
+    background-color: var(--flower-center);
+    background-image: radial-gradient(#5d3311 1px, transparent 1px);
+    background-size: 3px 3px;
     border-radius: 50%;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    z-index: 2;
+    z-index: 10;
+    box-shadow: inset 0 0 5px rgba(0,0,0,0.5);
 }
 
 /* MENSAJE FINAL */
-.Flores_Amarillas {
+.message-container {
     position: absolute;
-    bottom: 8%;
-    width: 80%;
-    max-width: 400px;
-    height: var(--letter-love);
-    background: var(--letter);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 20px;
-    font-size: 1.5rem;
-    font-style: italic;
-    letter-spacing: 2px;
-    color: #b58900;
+    bottom: 10%;
+    background-color: var(--message-bg);
+    padding: 15px 30px;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
     opacity: 0;
-    transition: opacity 2s ease;
+    transition: opacity 1.5s ease 0.5s, transform 1.5s ease 0.5s;
+    transform: translateY(20px);
+    z-index: 10;
 }
 
-/* ← Esta clase la agrega el JS */
-.Flores_Amarillas.show {
+.message-container.show {
     opacity: 1;
+    transform: translateY(0);
 }
 
-/* PARTÍCULAS */
-.particula {
-    position: fixed;
-    bottom: -10px;
-    width: 10px;
-    height: 10px;
-    background: gold;
-    border-radius: 50%;
-    animation: subir linear forwards;
+.message-text {
+    font-size: 1.6rem;
+    font-style: italic;
+    color: var(--message-text);
+    letter-spacing: 1px;
+    text-shadow: 1px 1px 1px rgba(255,255,255,0.5);
 }
-
-@keyframes subir {
-    to {
-        transform: translateY(-100vh);
-        opacity: 0;
-    }
-    }
