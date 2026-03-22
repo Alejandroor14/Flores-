@@ -1,20 +1,16 @@
 :root {
-    --letter-love: 80px;
-    --letter: rgba(255, 255, 255, 0.6);
+    --letter-love: 70px;
+    --letter: rgba(255, 255, 255, 0.55);
 }
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+* { margin: 0; padding: 0; box-sizing: border-box; }
 
 body {
     height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: radial-gradient(circle, #fff8dc, #fdf5e6);
+    background: #fdf5e6;
     overflow: hidden;
     font-family: Arial, sans-serif;
 }
@@ -29,7 +25,7 @@ body {
     flex-direction: column;
 }
 
-/* ── BOTÓN ───────────────────────────────────────────────────── */
+/* ── BOTÓN ── */
 #playButton {
     padding: 15px 35px;
     font-size: 1.3rem;
@@ -42,137 +38,67 @@ body {
     position: absolute;
     z-index: 10;
 }
-
-#playButton:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0 30px rgba(255,215,0,0.9);
-}
-
+#playButton:hover { transform: scale(1.05); }
 #playButton.fade-out {
     opacity: 0;
     pointer-events: none;
     transition: opacity 0.8s ease;
 }
 
-/* ── ÁRBOL ───────────────────────────────────────────────────── */
+/* ── ÁRBOL ── */
 .tree {
     opacity: 0;
-    transition: opacity 1s ease;
+    transition: opacity 0.8s ease;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
+.tree.show { opacity: 1; }
 
-.tree.show {
-    opacity: 1;
+/* ── CANVAS ── */
+#heartCanvas {
+    display: block;
 }
 
-/* ── CONTENEDOR CORAZÓN ──────────────────────────────────────── */
-.heart-leaves-container {
-    position: relative;
-    width: 300px;
-    height: 280px;
-}
-
-.heart-shape {
-    position: absolute;
-    width: 300px;
-    height: 280px;
-    overflow: visible;
-}
-
-/* ── TRONCO ──────────────────────────────────────────────────── */
+/* ── TRONCO ── */
 .trunk {
-    width: 28px;
+    width: 26px;
     height: 110px;
     background: linear-gradient(to right, #5d3311, #8b4513);
-    border-radius: 0 0 12px 12px;
+    border-radius: 0 0 10px 10px;
     transform-origin: bottom;
+    margin-top: -2px;
 }
 
-/* ── FLORES — pequeñas, redondas, tipo girasol ───────────────── */
-.flower {
-    position: absolute;
-    width: 14px;
-    height: 14px;
-    opacity: 0;
-}
-
-/* 4 pétalos elípticos en cruz → silueta floral */
-.flower::before {
-    content: '';
-    position: absolute;
-    width: 100%;
-    height: 40%;
-    background: #FFD700;
-    border-radius: 50%;
-    top: 30%;
-    left: 0;
-}
-
-.flower::after {
-    content: '';
-    position: absolute;
-    width: 40%;
-    height: 100%;
-    background: #FFD700;
-    border-radius: 50%;
-    top: 0;
-    left: 30%;
-}
-
-/* Centro oscuro encima de los pétalos */
-.flower-center {
-    position: absolute;
-    width: 6px;
-    height: 6px;
-    background: #2E1503;
-    border-radius: 50%;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 2;
-}
-
-/* ── MENSAJE FINAL ───────────────────────────────────────────── */
+/* ── MENSAJE ── */
 .Flores_Amarillas {
     position: absolute;
-    bottom: 8%;
-    width: 80%;
+    bottom: 7%;
+    width: 82%;
     max-width: 420px;
     height: var(--letter-love);
     background: var(--letter);
     display: flex;
     justify-content: center;
     align-items: center;
-    border-radius: 20px;
-    font-size: 1.4rem;
+    border-radius: 18px;
+    font-size: 1.35rem;
     font-style: italic;
     letter-spacing: 3px;
     color: #b58900;
     opacity: 0;
     transition: opacity 2s ease;
 }
+.Flores_Amarillas.show { opacity: 1; }
 
-.Flores_Amarillas.show {
-    opacity: 1;
-}
-
-/* ── PARTÍCULAS ──────────────────────────────────────────────── */
+/* ── PARTÍCULAS ── */
 .particula {
     position: fixed;
     bottom: -10px;
-    width: 8px;
-    height: 8px;
-    background: gold;
     border-radius: 50%;
+    background: gold;
     animation: subir linear forwards;
 }
-
 @keyframes subir {
-    to {
-        transform: translateY(-100vh);
-        opacity: 0;
-    }
+    to { transform: translateY(-100vh); opacity: 0; }
 }
-
