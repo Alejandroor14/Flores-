@@ -38,16 +38,10 @@ body {
     border-radius: 50px;
     cursor: pointer;
     box-shadow: 0 0 20px rgba(255,215,0,0.6);
-    transition: 0.3s;
-}
-
-#playButton:hover {
-    transform: scale(1.1);
 }
 
 #playButton.fade-out {
     opacity: 0;
-    pointer-events: none;
 }
 
 /* ÁRBOL */
@@ -63,47 +57,19 @@ body {
     opacity: 1;
 }
 
-/* CORAZÓN */
+/* CONTENEDOR CORAZÓN */
 .heart-leaves-container {
     position: relative;
     width: 300px;
-    height: 260px;
+    height: 300px;
 }
 
+/* IMPORTANTE: SIN FONDO */
 .heart-shape {
     position: absolute;
-    width: 160px;
-    height: 160px;
-    background: #ffdb58;
-    left: 70px;
-    top: 50px;
-    transform: rotate(-45deg);
-    overflow: hidden;
-    animation: latido 2s infinite;
-}
-
-.heart-shape::before,
-.heart-shape::after {
-    content: '';
-    position: absolute;
-    width: 160px;
-    height: 160px;
-    background: #ffdb58;
-    border-radius: 50%;
-}
-
-.heart-shape::before {
-    top: -80px;
-}
-
-.heart-shape::after {
-    left: 80px;
-}
-
-/* LATIDO */
-@keyframes latido {
-    0%,100% { transform: rotate(-45deg) scale(1); }
-    50% { transform: rotate(-45deg) scale(1.05); }
+    width: 300px;
+    height: 300px;
+    overflow: visible;
 }
 
 /* TRONCO */
