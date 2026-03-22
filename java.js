@@ -4,29 +4,29 @@ const heart = document.getElementById("heart");
 const mensaje = document.getElementById("mensaje");
 
 btn.addEventListener("click", () => {
-    btn.classList.add("fade-out");
 
-    // Mostrar árbol con animación
+    btn.classList.add("fade-out");
     tree.classList.add("show");
 
     crecerArbol();
 
     setTimeout(() => {
         generarFlores();
-    }, 1200);
+    }, 1000);
 
     setTimeout(() => {
         mensaje.classList.add("show");
         crearParticulas();
     }, 3000);
+
 });
 
 
-// 🌱 CRECIMIENTO DEL ÁRBOL
+// 🌱 CRECIMIENTO DEL TRONCO
 function crecerArbol() {
     const trunk = document.querySelector(".trunk");
+
     trunk.style.transform = "scaleY(0)";
-    trunk.style.transformOrigin = "bottom";
 
     setTimeout(() => {
         trunk.style.transition = "1s ease";
@@ -35,9 +35,11 @@ function crecerArbol() {
 }
 
 
-// 🌻 FLORES POCO A POCO
+// 🌻 FLORES ANIMADAS
 function generarFlores() {
-    for (let i = 0; i < 150; i++) {
+
+    for (let i = 0; i < 140; i++) {
+
         const flower = document.createElement("div");
         flower.classList.add("flower");
 
@@ -57,14 +59,16 @@ function generarFlores() {
             flower.style.transition = "0.4s ease";
             flower.style.opacity = 1;
             flower.style.transform = "scale(1)";
-        }, i * 25); // 👈 aparece poco a poco
+        }, i * 20);
     }
 }
 
 
-// ✨ PARTÍCULAS BONITAS
+// ✨ PARTÍCULAS
 function crearParticulas() {
-    for (let i = 0; i < 40; i++) {
+
+    for (let i = 0; i < 50; i++) {
+
         const p = document.createElement("div");
         p.classList.add("particula");
 
