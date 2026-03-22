@@ -1,47 +1,80 @@
-const btn = document.getElementById('playButton');
-const tree = document.getElementById('theTree');
-const heart = document.getElementById('heartShape');
-const message = document.getElementById('finalMessage');
+const btn = document.getElementById("playButton");
+const tree = document.getElementById("tree");
+const heart = document.getElementById("heart");
+const mensaje = document.getElementById("mensaje");
 
-// Generar las flores
-const totalFlowers = 120;
-const flowerArray = [];
+btn.addEventListener("click", () => {
+    btn.classList.add("fade-out");
 
-for (let i = 0; i < totalFlowers; i++) {
-    const flower = document.createElement('div');
-    flower.className = 'flower';
-    
-    const center = document.createElement('div');
-    center.className = 'flower-center';
-    flower.appendChild(center);
+    // Mostrar árbol con animación
+    tree.classList.add("show");
 
-    // Posición aleatoria
-    flower.style.left = Math.random() * 100 + '%';
-    flower.style.top = Math.random() * 100 + '%';
-    
-    // Tamaño y rotación
-    const scale = Math.random() * 0.5 + 0.6;
-    flower.style.transform = `scale(${scale}) rotate(${Math.random() * 360}deg)`;
+    crecerArbol();
 
-    heart.appendChild(flower);
-    flowerArray.push(flower);
+    setTimeout(() => {
+        generarFlores();
+    }, 1200);
+
+    setTimeout(() => {
+        mensaje.classList.add("show");
+        crearParticulas();
+    }, 3000);
+});
+
+
+// 🌱 CRECIMIENTO DEL ÁRBOL
+function crecerArbol() {
+    const trunk = document.querySelector(".trunk");
+    trunk.style.transform = "scaleY(0)";
+    trunk.style.transformOrigin = "bottom";
+
+    setTimeout(() => {
+        trunk.style.transition = "1s ease";
+        trunk.style.transform = "scaleY(1)";
+    }, 100);
 }
 
-// Evento clic
-btn.addEventListener('click', () => {
-    btn.classList.add('fade-out');
-    tree.classList.add('show');
-    
-    // Hacer aparecer las flores poco a poco
-    flowerArray.forEach((f, index) => {
-        setTimeout(() => {
-            f.style.opacity = "1";
-            f.style.transition = "opacity 0.5s ease";
-        }, index * 20); // Velocidad de "florecimiento"
-    });
 
-    // Mostrar mensaje al final
-    setTimeout(() => {
-        message.classList.add('show');
-    }, 2500);
-});
+// 🌻 FLORES POCO A POCO
+function generarFlores() {
+    for (let i = 0; i < 150; i++) {
+        const flower = document.createElement("div");
+        flower.classList.add("flower");
+
+        const center = document.createElement("div");
+        center.classList.add("flower-center");
+
+        flower.appendChild(center);
+
+        flower.style.top = Math.random() * 100 + "%";
+        flower.style.left = Math.random() * 100 + "%";
+
+        flower.style.transform = "scale(0)";
+
+        heart.appendChild(flower);
+
+        setTimeout(() => {
+            flower.style.transition = "0.4s ease";
+            flower.style.opacity = 1;
+            flower.style.transform = "scale(1)";
+        }, i * 25); // 👈 aparece poco a poco
+    }
+}
+
+
+// ✨ PARTÍCULAS BONITAS
+function crearParticulas() {
+    for (let i = 0; i < 40; i++) {
+        const p = document.createElement("div");
+        p.classList.add("particula");
+
+        p.style.left = Math.random() * 100 + "vw";
+        p.style.animationDuration = (2 + Math.random() * 3) + "s";
+
+        document.body.appendChild(p);
+
+        setTimeout(() => {
+            p.remove();
+        }, 5000);
+    }
+}
